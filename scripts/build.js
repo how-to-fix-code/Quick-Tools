@@ -4,7 +4,7 @@ const path = require('path');
 const TOOLS_DIR = path.join(__dirname, '../tools');
 const INDEX_PATH = path.join(__dirname, '../index.html');
 const SITEMAP_PATH = path.join(__dirname, '../sitemap.xml');
-const BASE_URL = 'https://YOUR_USER_NAME.github.io/Quick-Tools'; // CHANGE THIS
+const BASE_URL = 'https://how-to-fix-code.github.io/Quick-Tools';
 
 function getToolMetadata(toolPath) {
     try {
@@ -12,7 +12,7 @@ function getToolMetadata(toolPath) {
         if (!fs.existsSync(indexPath)) return null;
 
         const content = fs.readFileSync(indexPath, 'utf-8');
-        
+
         // Simple regex to extract meta tags. 
         // In a real production app, might use cheerio/jsdom, 
         // but for zero-dep simplicity regex is fine here.
@@ -33,7 +33,7 @@ function getToolMetadata(toolPath) {
 
 function generateSitemap(tools) {
     const today = new Date().toISOString().split('T')[0];
-    
+
     let xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
@@ -62,7 +62,7 @@ function generateSitemap(tools) {
 
 function updateIndexHtml(tools) {
     let html = fs.readFileSync(INDEX_PATH, 'utf-8');
-    
+
     const cardsHtml = tools.map(tool => `
                 <a href="${tool.path}" class="card">
                     <h3>${tool.title}</h3>
@@ -72,7 +72,7 @@ function updateIndexHtml(tools) {
 
     // Regex to find the grid container and replace its content
     const gridRegex = /(<div class="grid" id="tool-grid">)([\s\S]*?)(<\/div>)/;
-    
+
     if (gridRegex.test(html)) {
         html = html.replace(gridRegex, `$1\n${cardsHtml}\n$3`);
         fs.writeFileSync(INDEX_PATH, html);
