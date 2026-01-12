@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Tools - Professional Web Utilities</title>
+    <meta name="description"
+        content="A collection of fast, privacy-focused, client-side web tools for developers and creators.">
+
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Quick Tools",
+      "url": "https://YOUR_USER_NAME.github.io/Quick-Tools",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://YOUR_USER_NAME.github.io/Quick-Tools/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <!-- Design & Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- SEO & Verification -->
+    <meta name="google-site-verification" content="YOUR-VERIFICATION-CODE" />
+
+    <!-- Google Analytics (Placeholder) -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR-GA-ID"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'YOUR-GA-ID');
+    </script> -->
+
+    <!-- Google AdSense (Placeholder) -->
+    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR-ADSENSE-ID" crossorigin="anonymous"></script> -->
+</head>
+
+<body>
+
+    <header>
+        <a href="/" class="logo">QuickTools⚡</a>
+        <nav>
+            <!-- Add future nav items here -->
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>All the tools you need,<br><span>right in your browser.</span></h1>
+            <p>Fast light-weight, and privacy-friendly. No server uploads, ever.</p>
+        </section>
+
+        <section class="tools-container">
+            <div class="search-bar">
+                <input type="text" id="search" placeholder="Search for a tool..." onkeyup="filterTools()">
+            </div>
+
+            <!-- This Grid is Auto-Populated by scripts/build.js -->
+            <div class="grid" id="tool-grid">
+
+                <a href="tools/content-prompt-assistant/index.html" class="card">
+                    <h3>Content Prompt Assistant</h3>
+                    <p>A workflow tool for creators: Get breaking news prompts, generate shorts scripts, and create SEO
+                        metadata in seconds.</p>
+                    <div class="arrow">Use Tool &rarr;</div>
+                </a>
+
+                <a href="tools/template/index.html" class="card">
+                    <h3>Sample Tool (Template)</h3>
+                    <p>This is a starter template for adding new tools to the Quick Tools platform.</p>
+                    <div class="arrow">Use Tool &rarr;</div>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; <span id="year"></span> Quick Tools. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Simple client-side search functionality
+        function filterTools() {
+            const input = document.getElementById('search');
+            const filter = input.value.toUpperCase();
+            const grid = document.getElementById('tool-grid');
+            const cards = grid.getElementsByClassName('card');
+
+            for (let i = 0; i < cards.length; i++) {
+                const title = cards[i].getElementsByTagName("h3")[0];
+                const txtValue = title.textContent || title.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+
+</body>
+
+</html>

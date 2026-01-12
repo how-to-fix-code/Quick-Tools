@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Prompt Assistant</title>
+    <meta name="description"
+        content="A workflow tool for creators: Get breaking news prompts, generate shorts scripts, and create SEO metadata in seconds.">
+
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Content Prompt Assistant",
+      "applicationCategory": "ProductivityApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "description": "A workflow tool for creators: Get breaking news prompts, generate shorts scripts, and create SEO metadata in seconds."
+    }
+    </script>
+
+    <!-- Link to Main Styles -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- Tool Specific CSS -->
+    <style>
+        .workflow-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .step-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .step-card:hover {
+            border-color: var(--primary-color);
+        }
+
+        .step-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .step-badge {
+            background: var(--primary-color);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .step-phase {
+            font-family: monospace;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+
+        .accent-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+        }
+
+        /* Step Colors */
+        .step-1 .accent-bar {
+            background-color: #3b82f6;
+        }
+
+        /* Blue */
+        .step-1 .step-badge {
+            background-color: #3b82f6;
+        }
+
+        .step-2 .accent-bar {
+            background-color: #a855f7;
+        }
+
+        /* Purple */
+        .step-2 .step-badge {
+            background-color: #a855f7;
+        }
+
+        .step-3 .accent-bar {
+            background-color: #ec4899;
+        }
+
+        /* Pink */
+        .step-3 .step-badge {
+            background-color: #ec4899;
+        }
+
+        textarea {
+            width: 100%;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            color: var(--text-main);
+            font-family: inherit;
+            resize: vertical;
+            min-height: 120px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        textarea:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(99, 102, 241, 0.1);
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(51, 65, 85, 0.8);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .split-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .split-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #1e293b;
+            border: 1px solid var(--primary-color);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <a href="../../index.html" class="logo">QuickTools⚡</a>
+        <nav>
+            <a href="../../index.html" style="color: var(--text-muted); text-decoration: none;">&larr; Back to Home</a>
+        </nav>
+    </header>
+
+    <main class="workflow-container">
+        <section class="hero" style="padding: 2rem 0; text-align: center;">
+            <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">Shorts Content <span
+                    style="color: #a855f7;">Workflow</span></h1>
+            <p>Copy, paste, and generate prompts in seconds.</p>
+        </section>
+
+        <!-- Step 1: Breaking News -->
+        <div class="step-card step-1">
+            <div class="accent-bar"></div>
+            <div class="step-header">
+                <div class="step-title">
+                    <span class="step-badge">1</span>
+                    Get Breaking News
+                </div>
+                <span class="step-phase">Research Phase</span>
+            </div>
+
+            <p style="color: var(--text-muted); margin-bottom: 0.5rem; font-size: 0.9rem;">Use this prompt to find the
+                latest stories:</p>
+            <div class="input-group">
+                <textarea id="prompt1"
+                    readonly>Give me the latest breaking news from the United States today. Cover the most important and trending topics including politics, economy, technology, sports, business, and viral stories. Make the news engaging, easy to understand, and suitable for a short-form content creator who wants to inform and entertain at the same time</textarea>
+                <button class="copy-btn" onclick="copyText('prompt1', this)">
+                    📋 Copy
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 2: Script Generation -->
+        <div class="step-card step-2">
+            <div class="accent-bar"></div>
+            <div class="step-header">
+                <div class="step-title">
+                    <span class="step-badge">2</span>
+                    Generate Script
+                </div>
+                <span class="step-phase">Creation Phase</span>
+            </div>
+
+            <div class="split-grid">
+                <div>
+                    <span class="label" style="color: #a855f7;">Paste News Content Here:</span>
+                    <textarea id="newsInput" placeholder="Paste the news text you got from Step 1 here..."
+                        style="height: 300px;"></textarea>
+                </div>
+                <div>
+                    <span class="label" style="color: #10b981;">Final Prompt (Auto-Generated):</span>
+                    <div class="input-group" style="height: 300px;">
+                        <textarea id="prompt2Output" readonly style="height: 100%;">Create a funny and humorous YouTube Shorts script based on the news given below.
+
+The script should be written for one person only (single anchor / narrator).
+
+Break the script into short scenes, with each scene lasting around 8 seconds or less.
+
+Use light comedy, witty lines, and playful sarcasm while keeping the news understandable.
+
+The tone should be entertaining, energetic, and engaging to grab attention in the first few seconds.
+
+Add clear scene-wise dialogue or voice-over lines suitable for vertical video (YouTube Shorts).
+
+Avoid offensive content; keep it fun, safe, and audience-friendly.
+
+News Content:
+[Waiting for input...]</textarea>
+                        <div style="position: absolute; bottom: 10px; right: 10px; display: flex; gap: 0.5rem;">
+                            <button class="copy-btn" style="position: static;" onclick="clearInput()">Clear</button>
+                            <button class="copy-btn"
+                                style="position: static; background: #a855f7; border-color: #a855f7;"
+                                onclick="copyText('prompt2Output', this)">📋 Copy Prompt</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: Metadata -->
+        <div class="step-card step-3">
+            <div class="accent-bar"></div>
+            <div class="step-header">
+                <div class="step-title">
+                    <span class="step-badge">3</span>
+                    Metadata (SEO)
+                </div>
+                <span class="step-phase">Optimization Phase</span>
+            </div>
+
+            <p style="color: var(--text-muted); margin-bottom: 0.5rem; font-size: 0.9rem;">Generate your Title,
+                Description, and Tags:</p>
+            <div class="input-group">
+                <textarea id="prompt3" readonly
+                    style="height: 100px;">Create a Title, description and tags for youtube short. Make sure it follows all youtube rules, consider the SEO part of youtube, and policy too.</textarea>
+                <button class="copy-btn" onclick="copyText('prompt3', this)">
+                    📋 Copy
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; <span id="year"></span> Quick Tools. All rights reserved.</p>
+    </footer>
+
+    <!-- Toast UI -->
+    <div id="toast" class="toast">
+        ✅ Copied to clipboard!
+    </div>
+
+    <!-- Logic -->
+    <script>
+        document.getElementById('year').innerText = new Date().getFullYear();
+
+        const PROMPT_2_BASE = `Create a funny and humorous YouTube Shorts script based on the news given below.
+
+The script should be written for one person only (single anchor / narrator).
+
+Break the script into short scenes, with each scene lasting around 8 seconds or less.
+
+Use light comedy, witty lines, and playful sarcasm while keeping the news understandable.
+
+The tone should be entertaining, energetic, and engaging to grab attention in the first few seconds.
+
+Add clear scene-wise dialogue or voice-over lines suitable for vertical video (YouTube Shorts).
+
+Avoid offensive content; keep it fun, safe, and audience-friendly.
+
+News Content:
+`;
+
+        const newsInput = document.getElementById('newsInput');
+        const prompt2Output = document.getElementById('prompt2Output');
+
+        newsInput.addEventListener('input', function () {
+            const newsContent = this.value.trim();
+            if (newsContent) {
+                prompt2Output.value = PROMPT_2_BASE + newsContent + "\n";
+            } else {
+                prompt2Output.value = PROMPT_2_BASE + "[Waiting for input...]";
+            }
+        });
+
+        function clearInput() {
+            newsInput.value = '';
+            prompt2Output.value = PROMPT_2_BASE + "[Waiting for input...]";
+            newsInput.focus();
+        }
+
+        async function copyText(elementId, btnElement) {
+            const textarea = document.getElementById(elementId);
+            textarea.select();
+            textarea.setSelectionRange(0, 99999);
+
+            try {
+                await navigator.clipboard.writeText(textarea.value);
+                showToast();
+
+                // Button feedback
+                const originalText = btnElement.innerHTML;
+                btnElement.innerHTML = "✅ Copied!";
+                setTimeout(() => {
+                    btnElement.innerHTML = originalText;
+                }, 2000);
+
+            } catch (err) {
+                console.error('Failed to copy', err);
+                document.execCommand('copy'); // Fallback
+                showToast();
+            }
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
+        }
+    </script>
+</body>
+
+</html>
