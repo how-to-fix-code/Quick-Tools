@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Quick Tools</title>
+    <meta name="description" content="Learn about Quick Tools: A privacy-focused, client-side web tools platform.">
+
+    <!-- Design & Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <style>
+        .about-content {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .about-content h2 {
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        .about-content p {
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #666;
+        }
+
+        /* Dark mode support for p tags if not handled by global css */
+        @media (prefers-color-scheme: dark) {
+            .about-content p {
+                color: #ccc;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <a href="/Quick-Tools" class="logo">QuickTools⚡</a>
+        <nav>
+            <a href="/Quick-Tools/about.html"
+                style="margin-left: 20px; text-decoration: none; color: var(--text-color); font-weight: 600;">About</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" style="padding: 60px 20px 20px;">
+            <h1>About Quick Tools</h1>
+            <p>Simple, Fast, and Private.</p>
+        </section>
+
+        <section class="about-content">
+            <h2>Our Mission</h2>
+            <p>
+                Quick Tools was built with a simple philosophy: <strong>the web should be fast and useful.</strong>
+                We provide a collection of developer and productivity tools that run entirely in your browser.
+            </p>
+
+            <h2>Why Quick Tools?</h2>
+
+            <h3>🔒 Privacy First</h3>
+            <p>
+                Unlike many online converters and tools, we don't upload your data to any server.
+                Everything happens locally on your device using modern JavaScript. Your files, text, and images never
+                leave your browser.
+            </p>
+
+            <h3>⚡ Blazing Fast</h3>
+            <p>
+                No server round-trips means instant results. Whether you're formatting JSON or generating a prompt,
+                it happens immediately.
+            </p>
+
+            <h3>🛠️ Open Source</h3>
+            <p>
+                We believe in transparency. You can view the source code for this entire platform on
+                <a href="https://github.com/how-to-fix-code/Quick-Tools" target="_blank">GitHub</a>.
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; <span id="year"></span> Quick Tools. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+
+</body>
+
+</html>
