@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Quick Tools</title>
+    <meta name="description" content="Latest news, updates, and tutorials from Quick Tools.">
+    <link rel="icon" type="image/png" href="assets/images/QuickTools-bg-removed.png">
+
+    <!-- Design & Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <header>
+        <a href="/Quick-Tools" class="logo">
+            <img src="assets/images/QuickTools-bg-removed.png" alt="QuickTools Logo"
+                style="height: 40px; margin-right: 10px; vertical-align: middle;">
+            QuickTools⚡
+        </a>
+
+        <nav>
+            <a href="/Quick-Tools/about.html"
+                style="margin-left: 20px; text-decoration: none; color: var(--text-main); font-weight: 600;">About</a>
+            <a href="/Quick-Tools/blogs.html"
+                style="margin-left: 20px; text-decoration: none; color: var(--text-main); font-weight: 600;">Blog</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Our <br><span>Blog</span></h1>
+            <p>Updates, tutorials, and insights.</p>
+        </section>
+
+        <section class="tools-container">
+            <!-- Blog Grid -->
+            <div class="grid" id="blog-grid">
+                
+                <!-- Sample Post 1 -->
+                <a href="blogs/welcome-to-quick-tools/index.html" class="card">
+                    <h3>👋 Welcome to Quick Tools Blog</h3>
+                    <p>We are excited to launch our new blog section! Here we will share updates about new tools, privacy features, and useful guides.</p>
+                    <div class="arrow">Read Article &rarr;</div>
+                </a>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; <span id="year"></span> Quick Tools. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Quick Tools Blog - Quick Tools</title>
+    <meta name="description"
+        content="Welcome to the official Quick Tools blog. Learn about our mission to provide fast, privacy-focused, client-side tools.">
+
+    <!-- Design & Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <style>
+        .blog-post {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 1rem;
+        }
+
+        .blog-post h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            color: var(--text-main);
+        }
+
+        .blog-meta {
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            font-size: 0.95rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 2rem;
+        }
+
+        .blog-content {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: var(--text-main);
+        }
+
+        .blog-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-content h2 {
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+        }
+
+        .blog-content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .blog-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <a href="/Quick-Tools" class="logo">
+            <img src="../../assets/images/QuickTools-bg-removed.png" alt="QuickTools Logo"
+                style="height: 40px; margin-right: 10px; vertical-align: middle;">
+            QuickTools⚡
+        </a>
+
+        <nav>
+            <a href="/Quick-Tools/about.html"
+                style="margin-left: 20px; text-decoration: none; color: var(--text-main); font-weight: 600;">About</a>
+            <a href="/Quick-Tools/blogs.html"
+                style="margin-left: 20px; text-decoration: none; color: var(--text-main); font-weight: 600;">Blog</a>
+        </nav>
+    </header>
+
+    <main>
+        <article class="blog-post">
+            <a href="/Quick-Tools/blogs.html" class="back-link">&larr; Back to Blogs</a>
+
+            <header>
+                <h1>Welcome to Quick Tools Blog</h1>
+                <div class="blog-meta">Published on <span id="date">January 16, 2026</span></div>
+            </header>
+
+            <div class="blog-content">
+                <p>Hello and welcome! 👋</p>
+                <p>We are thrilled to announce the launch of the <strong>Quick Tools Blog</strong>. This space will
+                    serve
+                    as a hub for updates, tutorials, and deep dives into the technologies we use to build fast,
+                    privacy-centric web tools.</p>
+
+                <h2>Why a Blog?</h2>
+                <p>Quick Tools is growing. We have added several new utilities recently, and we want a place to explain
+                    how they work and how you can get the most out of them. We also want to share our journey in
+                    building a completely client-side platform.</p>
+
+                <h2>What to Expect</h2>
+                <ul>
+                    <li><strong>Tool Updates:</strong> Be the first to know when we launch a new tool or improve an
+                        existing one.</li>
+                    <li><strong>How-to Guides:</strong> Detailed tutorials on using our tools effectively.</li>
+                    <li><strong>Tech Deep Dives:</strong> Insights into our "no-server" architecture and how we ensure
+                        your data stays private.</li>
+                </ul>
+
+                <p>Stay tuned for more! We have some exciting tools in the pipeline.</p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; <span id="year"></span> Quick Tools. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+
+</body>
+
+</html>
