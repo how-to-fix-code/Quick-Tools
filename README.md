@@ -1,6 +1,6 @@
 # Quick Tools Platform ⚡
 
-A professional, client-side-only web platform for hosting utility tools and mini-apps. Designed for speed, privacy, and ease of expansion ("vibe coding").
+[Quick Tools](https://how-to-fix-code.github.io/Quick-Tools/) is a professional, client-side-only web platform for hosting utility tools and mini-apps. Designed for speed, privacy, and ease of expansion ("vibe coding").
 
 ## 🚀 Features
 
@@ -78,5 +78,6 @@ Every page MUST include JSON-LD structured data in the `<head>` tag.
 ## 🌍 Deployment
 
 The project is hosted on GitHub Pages.
-*   **URL**: `https://<YOUR-USERNAME>.github.io/Quick-Tools/`
+*   **Live Site**: [Quick Tools - Online Utilities](https://how-to-fix-code.github.io/Quick-Tools/)
+
 *   **Workflow**: `.github/workflows/deploy.yml` handles the build and deploy process automatically on every push to `main`.
