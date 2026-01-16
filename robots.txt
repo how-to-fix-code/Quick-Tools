@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://how-to-fix-code.github.io/Quick-Tools/sitemap.xml
